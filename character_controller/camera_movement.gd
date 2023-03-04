@@ -3,6 +3,7 @@ extends Camera3D
 @export var target: Node3D
 @export var distance_to_target: float = 9
 @export var sensitivity: float = 0.01
+@export var starting_pitch: float = -50
 
 var _start_mouse_position: Vector2
 var _axis: Vector2
@@ -13,6 +14,7 @@ var _pitch: float
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	assert(target != null)
+	_pitch = starting_pitch
 
 func _process(delta):
 	if Input.is_action_just_pressed("Orbit"):

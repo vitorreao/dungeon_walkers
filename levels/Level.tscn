@@ -1,9 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://ca8qxry68vcdr"]
+[gd_scene load_steps=9 format=3 uid="uid://doun5s70g7b4q"]
 
-[ext_resource type="PackedScene" uid="uid://cysyvnulbli1h" path="res://player.tscn" id="1_g7hte"]
-[ext_resource type="Script" path="res://camera_movement.gd" id="2_e1tij"]
-[ext_resource type="Script" path="res://nav_area.gd" id="2_gy8kc"]
-[ext_resource type="PackedScene" uid="uid://c6rkrrph4d85s" path="res://player_movement.tscn" id="3_gn0hq"]
+[ext_resource type="PackedScene" path="res://characters/player.tscn" id="1_g7hte"]
+[ext_resource type="Script" path="res://character_controller/camera_movement.gd" id="2_rhs70"]
+[ext_resource type="Script" path="res://character_controller/nav_area.gd" id="3_868gw"]
+[ext_resource type="PackedScene" uid="uid://btrye3rxntmm4" path="res://character_controller/player_movement.tscn" id="3_gn0hq"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8q22m"]
 size = Vector3(100, 1, 100)
@@ -27,7 +27,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02483, 0)
 
 [node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("target")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 7.5)
-script = ExtResource("2_e1tij")
+script = ExtResource("2_rhs70")
 target = NodePath("../Player")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
@@ -35,7 +35,7 @@ transform = Transform3D(1, 0, 0, 0, 0.556615, 0.830771, 0, -0.830771, 0.556615, 
 
 [node name="Ground" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -38.3406)
-script = ExtResource("2_gy8kc")
+script = ExtResource("3_868gw")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.501648, 0)

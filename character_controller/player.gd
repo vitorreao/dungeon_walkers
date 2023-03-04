@@ -1,10 +1,9 @@
-@icon("icon.svg")
 extends CharacterBody3D
 class_name Player
 
 signal navigation_finished()
 
-@export var movement_speed : float = 3.0
+@export var movement_speed : float = 4.0
 @export var turn_speed: float = 2.0
 
 @onready var navigation_agent : NavigationAgent3D = $NavigationAgent3D
