@@ -2,14 +2,7 @@ extends StaticBody3D
 class_name NavArea
 
 signal mouse_motion(
-	is_over: bool,
-	node: CollisionObject3D,
-	event: InputEventMouseMotion,
-	position: Vector3,
-	normal: Vector3
-)
-
-signal mouse_button(
+	is_hovering: bool,
 	node: CollisionObject3D,
 	event: InputEventMouseMotion,
 	position: Vector3,
@@ -33,10 +26,7 @@ func get_nav_region() -> NavigationRegion3D:
 func _input_event(camera, event, position, normal, shape_idx):
 	if not event is InputEventMouse:
 		return
-	if event is InputEventMouseMotion:
-		mouse_motion.emit(true, self, event, position, normal)
-	if event is InputEventMouseButton:
-		mouse_button.emit(self, event, position, normal)
+	mouse_motion.emit(true, self, event, position, normal)
 
 func _mouse_exit():
 	mouse_motion.emit(false, self, null, Vector3.ZERO, Vector3.ZERO)
