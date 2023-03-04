@@ -48,5 +48,6 @@ skeleton = NodePath("../../..")
 [node name="PlayerMovement" parent="." instance=ExtResource("3_gn0hq")]
 
 [connection signal="navigation_finished" from="Player" to="PlayerMovement" method="_on_player_reached_target"]
-[connection signal="mouse_over" from="Ground" to="PlayerMovement" method="_on_nav_area_mouse_over"]
+[connection signal="mouse_button" from="Ground" to="PlayerMovement" method="_on_target_mouse_button"]
+[connection signal="mouse_motion" from="Ground" to="PlayerMovement" method="_on_target_mouse_motion"]
 [connection signal="new_nav_target" from="PlayerMovement" to="Player" method="_on_new_nav_target"]

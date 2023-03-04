@@ -1,10 +1,17 @@
 extends StaticBody3D
 class_name NavArea
 
-signal mouse_over(
+signal mouse_motion(
 	is_over: bool,
-	node: NavArea,
-	event: InputEventMouse,
+	node: CollisionObject3D,
+	event: InputEventMouseMotion,
+	position: Vector3,
+	normal: Vector3
+)
+
+signal mouse_button(
+	node: CollisionObject3D,
+	event: InputEventMouseMotion,
 	position: Vector3,
 	normal: Vector3
 )
@@ -24,8 +31,12 @@ func get_nav_region() -> NavigationRegion3D:
 	return _navRegion3D
 
 func _input_event(camera, event, position, normal, shape_idx):
-	if event is InputEventMouse:
-		mouse_over.emit(true, self, event, position, normal)
+	if not event is InputEventMouse:
+		return
+	if event is InputEventMouseMotion:
+		mouse_motion.emit(true, self, event, position, normal)
+	if event is InputEventMouseButton:
+		mouse_button.emit(self, event, position, normal)
 
 func _mouse_exit():
-	mouse_over.emit(false, self, null, Vector3.ZERO, Vector3.ZERO)
+	mouse_motion.emit(false, self, null, Vector3.ZERO, Vector3.ZERO)
