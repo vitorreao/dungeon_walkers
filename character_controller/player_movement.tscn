@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://btrye3rxntmm4"]
+
+[ext_resource type="Script" path="res://character_controller/player_movement.gd" id="1_7ima2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yp3b1"]
+albedo_color = Color(0, 0.392157, 1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_hx3pg"]
+material = SubResource("StandardMaterial3D_yp3b1")
+height = 0.05
+radial_segments = 16
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_37eao"]
+albedo_color = Color(0, 0.537255, 1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_trndl"]
+material = SubResource("StandardMaterial3D_37eao")
+top_radius = 0.3
+bottom_radius = 0.01
+height = 0.5
+radial_segments = 4
+
+[node name="PlayerMovement" type="Node"]
+script = ExtResource("1_7ima2")
+
+[node name="Marker" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("CylinderMesh_hx3pg")
+skeleton = NodePath("../..")
+
+[node name="Target" type="Node3D" parent="."]
+visible = false
+
+[node name="Arrow" type="MeshInstance3D" parent="Target"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.256331, 0)
+mesh = SubResource("CylinderMesh_trndl")
