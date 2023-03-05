@@ -17,6 +17,7 @@ size = Vector3(0.5, 0.1, 1)
 
 [node name="mob" type="CharacterBody3D"]
 script = ExtResource("1_2264p")
+target_desired_distance = 1.5
 height = 2.0
 interactable = true
 
