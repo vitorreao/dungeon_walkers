@@ -26,7 +26,7 @@ size = Vector2(100, 100)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02483, 0)
 
 [node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("target")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 7.5)
+transform = Transform3D(-0.999848, 0, -0.0174525, 0, 1, 0, 0.0174525, 0, -0.999848, 0, 9, 7.5)
 script = ExtResource("2_rhs70")
 target = NodePath("../Player")
 
