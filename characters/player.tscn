@@ -9,22 +9,25 @@ albedo_color = Color(0.152941, 0.0666667, 1, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_nnjht"]
 material = SubResource("StandardMaterial3D_ij26c")
+radial_segments = 16
+rings = 4
 
 [sub_resource type="BoxMesh" id="BoxMesh_5m6rl"]
 size = Vector3(0.5, 0.1, 1)
 
 [node name="Player" type="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("1_rv06p")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_ua21r")
 
 [node name="Body" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_nnjht")
 
 [node name="Head" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.452629, -0.190044)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.44359, -0.190044)
 mesh = SubResource("BoxMesh_5m6rl")
 skeleton = NodePath("")
 

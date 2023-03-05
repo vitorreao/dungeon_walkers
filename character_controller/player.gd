@@ -8,7 +8,7 @@ signal navigation_finished()
 
 @onready var navigation_agent : NavigationAgent3D = $NavigationAgent3D
 
-func _on_new_nav_target(node: NavArea, position: Vector3):
+func _on_new_nav_target(node: CollisionObject3D, position: Vector3):
 	navigation_agent.set_target_position(position)
 	navigation_agent.target_desired_distance = node.target_desired_distance
 	navigation_agent.path_desired_distance = node.path_desired_distance
@@ -16,7 +16,7 @@ func _on_new_nav_target(node: NavArea, position: Vector3):
 func _physics_process(delta):
 	if not navigation_agent.is_navigation_finished():
 		_set_new_velocity()
-		_look_at_target(delta)
+	_look_at_target(delta)
 
 func _look_at_target(delta):
 	var next_path_position : Vector3 = navigation_agent.get_next_path_position()
