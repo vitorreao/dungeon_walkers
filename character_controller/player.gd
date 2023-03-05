@@ -4,13 +4,12 @@ class_name Player
 signal navigation_finished()
 
 @export var movement_speed : float = 4.0
-@export var turn_speed: float = 2.0
+@export var turn_speed: float = 3.0
 
 @onready var navigation_agent : NavigationAgent3D = $NavigationAgent3D
 
 var _is_navigating: bool = false
 var _curr_dest_position: Vector3 = Vector3.ZERO
-var _rotation_t: float = 0.0
 var _curr_src_rotation: float
 var _curr_dest_rotation: float
 
@@ -30,16 +29,11 @@ func _physics_process(delta):
 
 func _look_at_target(delta):
 	var next_path_position : Vector3 = navigation_agent.get_next_path_position()
-	if _curr_dest_position != next_path_position:
-		_rotation_t = 0.0
-		_curr_dest_position = next_path_position
-		_curr_src_rotation = rotation.y
-		var aux_transform = transform
-		look_at(next_path_position, Vector3.UP)
-		_curr_dest_rotation = rotation.y
-		transform = aux_transform
-	_rotation_t = min(_rotation_t + delta * turn_speed, 1.0)
-	rotation.y = lerp_angle(_curr_src_rotation, _curr_dest_rotation, _rotation_t)
+	var target_rotation_y = atan2(
+		global_position.x - next_path_position.x,
+		global_position.z - next_path_position.z
+	)
+	rotation.y = lerp_angle(rotation.y, target_rotation_y, turn_speed * delta)
 
 func _set_new_velocity():
 	var next_path_position : Vector3 = navigation_agent.get_next_path_position()
