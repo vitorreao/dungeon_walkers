@@ -9,6 +9,10 @@ var _current_target_normal: Vector3 = Vector3.ZERO
 var _current_target_height: float = 0.0
 var _has_current_target_position: bool = false
 
+@onready var _marker: MeshInstance3D = $Marker
+@onready var _target: Node3D = $Target
+@onready var _target_anim_player: AnimationPlayer = $Target/Arrow/AnimationPlayer
+
 func _set_nav_target():
 	var position = (
 		_current_target_position +
@@ -38,8 +42,8 @@ func _on_target_mouse_motion(
 	normal: Vector3,
 	height: float
 ):
-	$Marker.set_global_position(position)
-	$Marker.set_visible(is_hovering)
+	_marker.set_global_position(position)
+	_marker.set_visible(is_hovering)
 	_current_target_position = position
 	_current_target_node = node
 	_current_target_height = height
@@ -47,10 +51,10 @@ func _on_target_mouse_motion(
 	_has_current_target_position = true
 
 func _show_target_at(position: Vector3, height: float):
-	$Target.set_global_position(position)
-	$Target.set_visible(true)
-	$Target/Arrow/AnimationPlayer.play("spin")
+	_target.set_global_position(position)
+	_target.set_visible(true)
+	_target_anim_player.play("spin")
 
 func _hide_target():
-	$Target/Arrow/AnimationPlayer.stop()
-	$Target.set_visible(false)
+	_target_anim_player.stop()
+	_target.set_visible(false)
