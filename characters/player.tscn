@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=6 format=3 uid="uid://dr2ubgu5wvvbs"]
 
 [ext_resource type="Script" path="res://character_controller/player.gd" id="1_rv06p"]
 
@@ -31,4 +31,5 @@ skeleton = NodePath("")
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 avoidance_enabled = true
 
+[connection signal="navigation_finished" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_navigation_finished"]
 [connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_NavigationAgent3D_velocity_computed"]
