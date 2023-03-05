@@ -4,7 +4,11 @@ extends Camera3D
 @export var distance_to_target: float = 9
 @export var sensitivity: float = 0.01
 @export var starting_pitch: float = -50
-@export var rotation_speed: float = 2.0
+@export var rotation_speed: float = 3.0
+@export var max_pitch: float = -20.0
+@export var min_pitch: float = -85
+@export var max_distance_to_target: float = 15
+@export var min_distance_to_target: float = 5
 
 var _start_mouse_position: Vector2
 var _axis: Vector2
@@ -26,12 +30,22 @@ func _process(delta):
 	if Input.is_action_just_released("Orbit"):
 		_axis = Vector2.ZERO
 	if Input.is_action_just_released("Zoom In"):
-		pass
+		distance_to_target = clamp(
+			distance_to_target - 1,
+			min_distance_to_target,
+			max_distance_to_target
+		)
+	if Input.is_action_just_released("Zoom Out"):
+		distance_to_target = clamp(
+			distance_to_target + 1,
+			min_distance_to_target,
+			max_distance_to_target
+		)
 
 func _physics_process(delta):
 	_yaw -= _axis.x * sensitivity
 	_pitch -= _axis.y * sensitivity
-	_pitch = clamp(_pitch, -85, -20)
+	_pitch = clamp(_pitch, min_pitch, max_pitch)
 	var target_rotation = Quaternion.from_euler(Vector3(deg_to_rad(_pitch), deg_to_rad(_yaw), 0))
 	var new_rotation = Quaternion(transform.basis).slerp(target_rotation, rotation_speed * delta)
 	transform.basis = Basis(new_rotation)
