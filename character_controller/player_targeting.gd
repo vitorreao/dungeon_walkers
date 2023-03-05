@@ -1,5 +1,5 @@
 extends Node
-class_name PlayerMovement
+class_name PlayerTargeting
 
 signal new_nav_target(node: NavTarget, world_position: Vector3)
 

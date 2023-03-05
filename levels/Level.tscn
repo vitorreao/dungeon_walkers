@@ -1,9 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://doun5s70g7b4q"]
+[gd_scene load_steps=10 format=3 uid="uid://b0mf5gg6l0r3u"]
 
 [ext_resource type="PackedScene" uid="uid://dr2ubgu5wvvbs" path="res://characters/player.tscn" id="1_g7hte"]
 [ext_resource type="Script" path="res://character_controller/camera_movement.gd" id="2_rhs70"]
 [ext_resource type="Script" path="res://character_controller/nav_target.gd" id="3_3qtcu"]
-[ext_resource type="PackedScene" uid="uid://btrye3rxntmm4" path="res://character_controller/player_movement.tscn" id="3_gn0hq"]
+[ext_resource type="PackedScene" uid="uid://otgi5fybyx3n" path="res://character_controller/player_targeting.tscn" id="3_gn0hq"]
 [ext_resource type="PackedScene" uid="uid://bmnfy23e32utp" path="res://characters/mob.tscn" id="5_wm37a"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8q22m"]
@@ -49,12 +49,12 @@ navigation_mesh = SubResource("NavigationMesh_c274i")
 mesh = SubResource("PlaneMesh_nwjew")
 skeleton = NodePath("../../..")
 
-[node name="PlayerMovement" parent="." instance=ExtResource("3_gn0hq")]
+[node name="PlayerTargeting" parent="." instance=ExtResource("3_gn0hq")]
 
 [node name="mob" parent="." instance=ExtResource("5_wm37a")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -9.64112)
 
-[connection signal="navigation_finished" from="Player" to="PlayerMovement" method="_on_player_reached_target"]
-[connection signal="mouse_motion" from="Ground" to="PlayerMovement" method="_on_target_mouse_motion"]
-[connection signal="new_nav_target" from="PlayerMovement" to="Player" method="_on_new_nav_target"]
-[connection signal="mouse_motion" from="mob" to="PlayerMovement" method="_on_target_mouse_motion"]
+[connection signal="navigation_finished" from="Player" to="PlayerTargeting" method="_on_player_reached_target"]
+[connection signal="mouse_motion" from="Ground" to="PlayerTargeting" method="_on_target_mouse_motion"]
+[connection signal="new_nav_target" from="PlayerTargeting" to="Player" method="_on_new_nav_target"]
+[connection signal="mouse_motion" from="mob" to="PlayerTargeting" method="_on_target_mouse_motion"]
