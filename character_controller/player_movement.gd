@@ -1,9 +1,9 @@
 extends Node
 class_name PlayerMovement
 
-signal new_nav_target(node: NavArea, world_position: Vector3)
+signal new_nav_target(node: NavTarget, world_position: Vector3)
 
-var _current_target_node: CollisionObject3D = null
+var _current_target_node: NavTarget = null
 var _current_target_position: Vector3 = Vector3.ZERO
 var _current_target_normal: Vector3 = Vector3.ZERO
 var _current_target_height: float = 0.0
@@ -32,7 +32,7 @@ func _on_player_reached_target():
 
 func _on_target_mouse_motion(
 	is_hovering: bool,
-	node: CollisionObject3D,
+	node: NavTarget,
 	event: InputEventMouse,
 	position: Vector3,
 	normal: Vector3,

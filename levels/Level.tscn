@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dr2ubgu5wvvbs" path="res://characters/player.tscn" id="1_g7hte"]
 [ext_resource type="Script" path="res://character_controller/camera_movement.gd" id="2_rhs70"]
-[ext_resource type="Script" path="res://character_controller/nav_area.gd" id="3_868gw"]
+[ext_resource type="Script" path="res://character_controller/nav_target.gd" id="3_3qtcu"]
 [ext_resource type="PackedScene" uid="uid://btrye3rxntmm4" path="res://character_controller/player_movement.tscn" id="3_gn0hq"]
 [ext_resource type="PackedScene" uid="uid://bmnfy23e32utp" path="res://characters/mob.tscn" id="5_wm37a"]
 
@@ -36,7 +36,7 @@ transform = Transform3D(1, 0, 0, 0, 0.556615, 0.830771, 0, -0.830771, 0.556615, 
 
 [node name="Ground" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -38.3406)
-script = ExtResource("3_868gw")
+script = ExtResource("3_3qtcu")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.501648, 0)

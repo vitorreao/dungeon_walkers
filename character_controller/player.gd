@@ -8,7 +8,7 @@ signal navigation_finished()
 
 @onready var navigation_agent : NavigationAgent3D = $NavigationAgent3D
 
-func _on_new_nav_target(node: CollisionObject3D, position: Vector3):
+func _on_new_nav_target(node: NavTarget, position: Vector3):
 	navigation_agent.set_target_position(position)
 	navigation_agent.target_desired_distance = node.target_desired_distance
 	navigation_agent.path_desired_distance = node.path_desired_distance
