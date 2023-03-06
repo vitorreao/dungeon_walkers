@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://b0mf5gg6l0r3u"]
+[gd_scene load_steps=11 format=3 uid="uid://b0mf5gg6l0r3u"]
 
 [ext_resource type="PackedScene" uid="uid://dr2ubgu5wvvbs" path="res://characters/player.tscn" id="1_g7hte"]
 [ext_resource type="Script" path="res://character_controller/camera_movement.gd" id="2_rhs70"]
 [ext_resource type="Script" path="res://character_controller/nav_target.gd" id="3_3qtcu"]
 [ext_resource type="PackedScene" uid="uid://otgi5fybyx3n" path="res://character_controller/player_targeting.tscn" id="3_gn0hq"]
 [ext_resource type="PackedScene" uid="uid://bmnfy23e32utp" path="res://characters/mob.tscn" id="5_wm37a"]
+[ext_resource type="Script" path="res://debug/fps_counter.gd" id="6_q5cf8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8q22m"]
 size = Vector3(100, 1, 100)
@@ -22,7 +23,7 @@ albedo_color = Color(0.294118, 0.568627, 0.262745, 1)
 material = SubResource("StandardMaterial3D_82lx2")
 size = Vector2(100, 100)
 
-[node name="Level" type="Node3D"]
+[node name="Main" type="Node3D"]
 
 [node name="Player" parent="." instance=ExtResource("1_g7hte")]
 
@@ -53,6 +54,21 @@ skeleton = NodePath("../../..")
 
 [node name="mob" parent="." instance=ExtResource("5_wm37a")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -9.64112)
+
+[node name="UserInterface" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="FPS" type="Label" parent="UserInterface"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+text = "60"
+script = ExtResource("6_q5cf8")
 
 [connection signal="navigation_finished" from="Player" to="PlayerTargeting" method="_on_player_reached_target"]
 [connection signal="mouse_motion" from="Ground" to="PlayerTargeting" method="_on_target_mouse_motion"]
