@@ -22,7 +22,7 @@ func _set_nav_target():
 	_show_target_at(position, _current_target_height)
 	new_nav_target.emit(_current_target_node, _current_target_position)
 
-func _physics_process(delta):
+func _process(delta):
 	if _has_current_target_position and Input.is_action_pressed("Interact"):
 		_set_nav_target()
 
