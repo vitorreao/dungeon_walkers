@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://b0mf5gg6l0r3u"]
+[gd_scene load_steps=12 format=3 uid="uid://bcggfivledi2r"]
 
-[ext_resource type="PackedScene" uid="uid://dr2ubgu5wvvbs" path="res://characters/player.tscn" id="1_g7hte"]
+[ext_resource type="PackedScene" uid="uid://335qwwdbc32m" path="res://characters/player.tscn" id="1_g7hte"]
 [ext_resource type="Script" path="res://character_controller/camera_movement.gd" id="2_rhs70"]
-[ext_resource type="Script" path="res://character_controller/nav_target.gd" id="3_3qtcu"]
-[ext_resource type="PackedScene" uid="uid://otgi5fybyx3n" path="res://character_controller/player_targeting.tscn" id="3_gn0hq"]
-[ext_resource type="PackedScene" uid="uid://bmnfy23e32utp" path="res://characters/mob.tscn" id="5_wm37a"]
+[ext_resource type="PackedScene" uid="uid://bde5hhqsq6ugi" path="res://character_controller/player_navigation.tscn" id="3_gn0hq"]
+[ext_resource type="Script" path="res://character_controller/player_target.gd" id="3_k2jos"]
+[ext_resource type="PackedScene" uid="uid://dfchwj6gdqdm2" path="res://characters/mob.tscn" id="5_wm37a"]
+[ext_resource type="Script" path="res://character_controller/interactable.gd" id="6_a1a4i"]
 [ext_resource type="Script" path="res://debug/fps_counter.gd" id="6_q5cf8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8q22m"]
@@ -35,25 +36,26 @@ target = NodePath("../Player")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.556615, 0.830771, 0, -0.830771, 0.556615, 0, 5.5114, 7.5551)
 
-[node name="Ground" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -38.3406)
-script = ExtResource("3_3qtcu")
+[node name="PlayerNavigation" parent="." instance=ExtResource("3_gn0hq")]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+[node name="Ground" type="StaticBody3D" parent="PlayerNavigation"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -38.3406)
+script = ExtResource("3_k2jos")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerNavigation/Ground"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.501648, 0)
 shape = SubResource("BoxShape3D_8q22m")
 
-[node name="NavigationRegion3D" type="NavigationRegion3D" parent="Ground"]
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="PlayerNavigation/Ground"]
 navigation_mesh = SubResource("NavigationMesh_c274i")
 
-[node name="Graphics" type="MeshInstance3D" parent="Ground/NavigationRegion3D"]
+[node name="Graphics" type="MeshInstance3D" parent="PlayerNavigation/Ground/NavigationRegion3D"]
 mesh = SubResource("PlaneMesh_nwjew")
-skeleton = NodePath("../../..")
+skeleton = NodePath("../../../..")
 
-[node name="PlayerTargeting" parent="." instance=ExtResource("3_gn0hq")]
-
-[node name="mob" parent="." instance=ExtResource("5_wm37a")]
+[node name="Mob" parent="PlayerNavigation" instance=ExtResource("5_wm37a")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -9.64112)
+script = ExtResource("6_a1a4i")
 
 [node name="UserInterface" type="Control" parent="."]
 layout_mode = 3
@@ -70,7 +72,5 @@ theme_override_constants/outline_size = 5
 text = "60"
 script = ExtResource("6_q5cf8")
 
-[connection signal="navigation_finished" from="Player" to="PlayerTargeting" method="_on_player_reached_target"]
-[connection signal="mouse_motion" from="Ground" to="PlayerTargeting" method="_on_target_mouse_motion"]
-[connection signal="new_nav_target" from="PlayerTargeting" to="Player" method="_on_new_nav_target"]
-[connection signal="mouse_motion" from="mob" to="PlayerTargeting" method="_on_target_mouse_motion"]
+[connection signal="navigation_finished" from="Player" to="PlayerNavigation" method="_on_player_reached_target"]
+[connection signal="new_nav_target" from="PlayerNavigation" to="Player" method="_on_new_nav_target"]

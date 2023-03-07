@@ -1,6 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://dr2ubgu5wvvbs"]
+[gd_scene load_steps=6 format=3 uid="uid://335qwwdbc32m"]
 
-[ext_resource type="Script" path="res://character_controller/player.gd" id="1_rv06p"]
+[ext_resource type="Script" path="res://character_controller/player_movement.gd" id="1_aonxq"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ua21r"]
 
@@ -16,7 +16,7 @@ rings = 4
 size = Vector3(0.5, 0.1, 1)
 
 [node name="Player" type="CharacterBody3D"]
-script = ExtResource("1_rv06p")
+script = ExtResource("1_aonxq")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

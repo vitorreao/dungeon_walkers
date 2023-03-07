@@ -1,6 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://bmnfy23e32utp"]
+[gd_scene load_steps=6 format=3 uid="uid://dfchwj6gdqdm2"]
 
-[ext_resource type="Script" path="res://character_controller/nav_target.gd" id="1_2264p"]
+[ext_resource type="Script" path="res://character_controller/player_target.gd" id="1_2264p"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_c7pop"]
 
@@ -15,7 +15,7 @@ rings = 4
 [sub_resource type="BoxMesh" id="BoxMesh_l2alu"]
 size = Vector3(0.5, 0.1, 1)
 
-[node name="mob" type="CharacterBody3D"]
+[node name="Mob" type="CharacterBody3D"]
 script = ExtResource("1_2264p")
 height = 2.0
 interactable = true

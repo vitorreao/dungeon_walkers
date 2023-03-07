@@ -1,9 +1,9 @@
 extends PhysicsBody3D
-class_name NavTarget
+class_name PlayerTarget
 
 signal mouse_motion(
 	is_hovering: bool,
-	node: NavTarget,
+	node: PlayerTarget,
 	event: InputEventMouseMotion,
 	position: Vector3,
 	normal: Vector3,

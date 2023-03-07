@@ -1,9 +1,9 @@
 extends Node
-class_name PlayerTargeting
+class_name PlayerNavigation
 
-signal new_nav_target(node: NavTarget, world_position: Vector3)
+signal new_nav_target(node: PlayerTarget, world_position: Vector3)
 
-var _current_target_node: NavTarget = null
+var _current_target_node: PlayerTarget = null
 var _current_target_position: Vector3 = Vector3.ZERO
 var _current_target_normal: Vector3 = Vector3.ZERO
 var _current_target_height: float = 0.0
@@ -12,6 +12,12 @@ var _has_current_target_position: bool = false
 @onready var _marker: MeshInstance3D = $Marker
 @onready var _target: Node3D = $Target
 @onready var _target_anim_player: AnimationPlayer = $Target/Arrow/AnimationPlayer
+
+func _ready():
+	for child in get_children(true):
+		if child is PlayerTarget:
+			var target = child as PlayerTarget
+			target.mouse_motion.connect(_on_target_mouse_motion)
 
 func _set_nav_target():
 	var position = (
@@ -36,7 +42,7 @@ func _on_player_reached_target():
 
 func _on_target_mouse_motion(
 	is_hovering: bool,
-	node: NavTarget,
+	node: PlayerTarget,
 	event: InputEventMouse,
 	position: Vector3,
 	normal: Vector3,

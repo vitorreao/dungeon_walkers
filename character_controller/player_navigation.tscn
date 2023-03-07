@@ -1,6 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://otgi5fybyx3n"]
+[gd_scene load_steps=9 format=3 uid="uid://bde5hhqsq6ugi"]
 
-[ext_resource type="Script" path="res://character_controller/player_targeting.gd" id="1_phhoq"]
+[ext_resource type="Script" path="res://character_controller/player_navigation.gd" id="1_1dfvj"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yp3b1"]
 albedo_color = Color(0, 0.392157, 1, 1)
@@ -82,8 +82,8 @@ _data = {
 "spin": SubResource("Animation_pgsmn")
 }
 
-[node name="PlayerTargeting" type="Node"]
-script = ExtResource("1_phhoq")
+[node name="PlayerNavigation" type="Node"]
+script = ExtResource("1_1dfvj")
 
 [node name="Marker" type="MeshInstance3D" parent="."]
 visible = false
