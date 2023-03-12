@@ -13,6 +13,9 @@ var _has_current_target_position: bool = false
 @onready var _target: Node3D = $Target
 @onready var _target_anim_player: AnimationPlayer = $Target/Arrow/AnimationPlayer
 
+var _current_interaction_node: PlayerTarget
+var _current_interaction_position: Vector3
+
 func _ready():
 	for child in get_children(true):
 		if child is PlayerTarget:
@@ -25,14 +28,17 @@ func _set_nav_target():
 		_current_target_node.transform.basis.y.normalized() *
 		_current_target_height
 	)
-	_show_target_at(position, _current_target_height)
-	new_nav_target.emit(_current_target_node, _current_target_position)
+	if _current_target_node != _current_interaction_node or _current_target_position != _current_interaction_position:
+		_current_interaction_node = _current_target_node
+		_current_interaction_position = _current_target_position
+		new_nav_target.emit(_current_target_node, _current_target_position)
+		_show_target_at(position, _current_target_height)
 
 func _process(delta):
 	if _has_current_target_position and Input.is_action_pressed("Interact"):
 		_set_nav_target()
 
-func _on_player_reached_target():
+func _on_player_navigation_finished():
 	_hide_target()
 	_current_target_position = Vector3.ZERO
 	_current_target_node = null

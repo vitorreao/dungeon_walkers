@@ -72,5 +72,5 @@ theme_override_constants/outline_size = 5
 text = "60"
 script = ExtResource("6_q5cf8")
 
-[connection signal="navigation_finished" from="Player" to="PlayerNavigation" method="_on_player_reached_target"]
-[connection signal="new_nav_target" from="PlayerNavigation" to="Player" method="_on_new_nav_target"]
+[connection signal="navigation_finished" from="Player" to="PlayerNavigation" method="_on_player_navigation_finished"]
+[connection signal="new_nav_target" from="PlayerNavigation" to="Player" method="_on_new_interaction"]

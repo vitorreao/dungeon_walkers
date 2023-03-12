@@ -1,6 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://0ii0gdb1gymp"]
+[gd_scene load_steps=8 format=3 uid="uid://0ii0gdb1gymp"]
 
 [ext_resource type="Script" path="res://character_controller/character_movement.gd" id="1_c52dg"]
+[ext_resource type="Script" path="res://character_controller/player_controller.gd" id="1_unq68"]
+[ext_resource type="Script" path="res://character_controller/character_controller.gd" id="2_iqdk6"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ua21r"]
 
@@ -16,7 +18,7 @@ rings = 4
 size = Vector3(0.5, 0.1, 1)
 
 [node name="Player" type="CharacterBody3D"]
-script = ExtResource("1_c52dg")
+script = ExtResource("1_unq68")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -34,5 +36,10 @@ skeleton = NodePath("")
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 avoidance_enabled = true
 
-[connection signal="navigation_finished" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_navigation_finished"]
-[connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_NavigationAgent3D_velocity_computed"]
+[node name="CharacterMovement" type="Node" parent="." node_paths=PackedStringArray("navigation_agent")]
+script = ExtResource("1_c52dg")
+navigation_agent = NodePath("../NavigationAgent3D")
+
+[node name="CharacterController" type="Node" parent="." node_paths=PackedStringArray("character_movement")]
+script = ExtResource("2_iqdk6")
+character_movement = NodePath("../CharacterMovement")
