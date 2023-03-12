@@ -1,11 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://bcggfivledi2r"]
+[gd_scene load_steps=11 format=3 uid="uid://bcggfivledi2r"]
 
 [ext_resource type="PackedScene" uid="uid://0ii0gdb1gymp" path="res://characters/player.tscn" id="1_g7hte"]
 [ext_resource type="Script" path="res://character_controller/camera_movement.gd" id="2_rhs70"]
 [ext_resource type="PackedScene" uid="uid://bde5hhqsq6ugi" path="res://character_controller/player_navigation.tscn" id="3_gn0hq"]
 [ext_resource type="Script" path="res://character_controller/player_target.gd" id="3_k2jos"]
 [ext_resource type="PackedScene" uid="uid://dfchwj6gdqdm2" path="res://characters/mob.tscn" id="5_wm37a"]
-[ext_resource type="Script" path="res://character_controller/interactable.gd" id="6_a1a4i"]
 [ext_resource type="Script" path="res://debug/fps_counter.gd" id="6_q5cf8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8q22m"]
@@ -55,7 +54,6 @@ skeleton = NodePath("../../../..")
 
 [node name="Mob" parent="PlayerNavigation" instance=ExtResource("5_wm37a")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -9.64112)
-script = ExtResource("6_a1a4i")
 
 [node name="UserInterface" type="Control" parent="."]
 layout_mode = 3
