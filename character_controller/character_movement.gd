@@ -1,5 +1,5 @@
 extends CharacterBody3D
-class_name PlayerMovement
+class_name CharacterMovement
 
 signal navigation_finished()
 
